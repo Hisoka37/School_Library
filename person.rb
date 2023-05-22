@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Person section
 class Person
   attr_reader :id
