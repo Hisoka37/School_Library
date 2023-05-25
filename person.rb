@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Person section
 require_relative 'nameable'
 require_relative 'capitalize_decorator'
@@ -29,7 +31,7 @@ class Person < Nameable
   def correct_name
     @name
   end
-  
+
   def add_rental(book, date)
     Rental.new(date, book, self)
   end
