@@ -6,99 +6,99 @@ require './book'
 require './rental'
 
 class App
-    def initialize
-        @people = []
-        @books = []
-        @rentals = []
-        @classroom = Classroom.new('Grade')
+  def initialize
+    @people = []
+    @books = []
+    @rentals = []
+    @classroom = Classroom.new('Grade 10')
+  end
+
+  def list_all_books
+    if @books.empty?
+      puts 'Oops! the library is empty, please add books'
+      return
     end
-
-    def list_books
-        if @books.empty?
-            puts 'the library is empty, please add books.'
-            return
-        end
-        @books.each do |book|
-            puts "Title: #{boook.title}, Author: #{book.author}"
-        end
+    @books.each do |book|
+      puts "Title: #{book.title}, Author: #{book.author}"
     end
+  end
 
-    def list_people
-        if people.empty?
-            puts "No people registred, please add people"
-        else
-            @people.each |person|
-            puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-            end
-        end
+  def list_all_people
+    if @people.empty?
+      puts 'Oops! no people registered, please add people'
+    else
+      @people.each do |person|
+        puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
     end
+  end
 
-    def create_person
-        puts 'Do you want to create a student (1) or a teacher(2)?....'
-        option = gets.chomp
+  def create_person
+    puts 'Do you want to create a student (1) or a teacher(2)?....'
+    option = gets.chomp
 
-        case option
-         when '1'
-         create_student
-         when '2'
-         create_teacher
-         else
-        puts 'Invalid input! Please type 1 or 2'
-       end
-   end
+    case option
+    when '1'
+      create_student
+    when '2'
+      create_teacher
+    else
+      puts 'Invalid input! Please type 1 or 2'
+    end
+  end
 
-   def create_student
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Age: '
-    age = gets.chomp.to_i
-    
-    print 'Has Parent permission? [Y/N]:'
-    parent_permission = gets.chomp.downcase
-
-    student = Student.new(age,@classroom, name, parent_permission: parent_permission == 'y')
-    @people << student
-    puts 'Student created successfully'
-   end
-
-   def create_teacher
+  def create_student
     print 'Name:'
     name = gets.chomp
 
-    print 'Age: '
+    print 'Age:'
     age = gets.chomp.to_i
-    
+
+    print 'Has Parent permission? [Y/N]:'
+    parent_permission = gets.chomp.downcase
+
+    student = Student.new(age, @classroom, name, parent_permission: parent_permission == 'y')
+    @people << student
+    puts 'Student created successfully'
+  end
+
+  def create_teacher
+    print 'Name:'
+    name = gets.chomp
+
+    print 'Age:'
+    age = gets.chomp.to_i
+
     print 'Specialization:'
     specialization = gets.chomp
 
-    @poeple << Techer.new(age, specialization, name)
+    @people << Teacher.new(age, specialization, name)
     puts 'Teacher created successfully'
-   end
+  end
 
-   def create_book
+  def create_book
     print 'Title: '
     title = gets.chomp
 
     print 'Author: '
     author = gets.chomp
 
-
     @books << Book.new(title, author)
-    puts 'Book created successfully'
-   end
 
-   def create_rental
+    puts 'Book created successfully'
+  end
+
+  def create_rental
     puts 'Select a book from the following list by number'
-    @books.each.with_index do |book, index|
-        puts "#{index}) Title:#{book.titile}, Author: #{book.author}"
+    @books.each_with_index do |book, index|
+      puts "#{index}) Title: #{book.title}, Author: #{book.author}"
     end
 
     book_id = gets.chomp.to_i
 
     puts 'Select a person from the following list by number'
-    @people.each.with_index do |person, index|
-        puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    @people.each_with_index do |person, index|
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
 
     person_id = gets.chomp.to_i
