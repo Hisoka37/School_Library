@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require './app'
 
-class Main 
-    def initialize
-        @app = App.new
-    end
+class Main
+  def initialize
+    @app = App.new
+  end
 
   def menu
     puts 'Welcome to the School Library App:'
@@ -17,7 +19,7 @@ class Main
       puts '6 - List all rentals for a given person id'
       puts '7 - Exit'
       option = gets.chomp
-      
+
       case option
       when '1'
         @app.list_all_books

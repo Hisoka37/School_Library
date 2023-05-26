@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Person section
 require_relative 'nameable'
 require_relative 'capitalize_decorator'
