@@ -1,5 +1,5 @@
 require './app'
-# rubocop:disable Metrics/CyclomaticComplexity
+
 class Main
   MENU_OPTIONS = {
     '1' => { description: 'List all books', action: :list_all_books },
@@ -78,4 +78,3 @@ end
 
 main = Main.new
 main.menu
-# rubocop:enable Metrics/CyclomaticComplexity
