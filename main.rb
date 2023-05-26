@@ -1,43 +1,78 @@
 require './app'
 # rubocop:disable Metrics/CyclomaticComplexity
 class Main
+  MENU_OPTIONS = {
+    '1' => { description: 'List all books', action: :list_all_books },
+    '2' => { description: 'List all people', action: :list_all_people },
+    '3' => { description: 'Create a person', action: :create_person },
+    '4' => { description: 'Create a book', action: :create_book },
+    '5' => { description: 'Create a rental', action: :create_rental },
+    '6' => { description: 'List all rentals for a given person id', action: :list_rentals },
+    '7' => { description: 'Exit', action: :exit }
+  }.freeze
+
   def initialize
     @app = App.new
   end
 
   def menu
     puts 'Welcome to the School Library App:'
+
     loop do
-      puts 'Please choose an option by entering a number:'
-      puts '1 - List all books'
-      puts '2 - List all people'
-      puts '3 - Create a person'
-      puts '4 - Create a book'
-      puts '5 - Create a rental'
-      puts '6 - List all rentals for a given person id'
-      puts '7 - Exit'
+      display_menu_options
       option = gets.chomp
 
-      case option
-      when '1'
-        @app.list_all_books
-      when '2'
-        @app.list_all_people
-      when '3'
-        @app.create_person
-      when '4'
-        @app.create_book
-      when '5'
-        @app.create_rental
-      when '6'
-        @app.list_rentals
-      when '7'
-        puts 'Thank you for using our library ¯\^-^/¯'
-        return
+      if valid_option?(option)
+        execute_option(option)
+        return if option == '7'
       else
         puts 'Please enter a number between 1 and 7'
       end
     end
+  end
+
+  private
+
+  def display_menu_options
+    puts 'Please choose an option by entering a number:'
+    MENU_OPTIONS.each { |key, value| puts "#{key} - #{value[:description]}" }
+  end
+
+  def valid_option?(option)
+    MENU_OPTIONS.key?(option)
+  end
+
+  def execute_option(option)
+    action = MENU_OPTIONS[option][:action]
+    send(action)
+  end
+
+  def list_all_books
+    @app.list_all_books
+  end
+
+  def list_all_people
+    @app.list_all_people
+  end
+
+  def create_person
+    @app.create_person
+  end
+
+  def create_book
+    @app.create_book
+  end
+
+  def create_rental
+    @app.create_rental
+  end
+
+  def list_rentals
+    @app.list_rentals
+  end
+
+  def exit
+    puts 'Thank you for using our library ¯\^-^/¯'
   end
 end
 
