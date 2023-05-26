@@ -1,6 +1,5 @@
 require './app'
 # rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable ClassLength
 class Main
   def initialize
     @app = App.new
@@ -45,4 +44,3 @@ end
 main = Main.new
 main.menu
 # rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable ClassLength
